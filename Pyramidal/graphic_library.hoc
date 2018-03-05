@@ -70,6 +70,7 @@ proc allInOneBoxSpiking() { local i
 	//////// SubVBoxes ////////
 	SubVBoxObj[0].intercept(1)
 		Plot1V($s1,"soma")
+		Plot1V($s1,"axon")
 		Plot1V($s1,"dend")
 		//SubDeckObj[0].map()
 		SubDeckObj[0].flip_to(0)
@@ -77,11 +78,13 @@ proc allInOneBoxSpiking() { local i
 	
 	SubVBoxObj[1].intercept(1)
 		$o2.soma nrnsecmenu(.5,1)
+		$o2.axon nrnsecmenu(.5,1)
 	SubVBoxObj[1].intercept(0)
 	
 	SubVBoxObj[2].intercept(1)
 		nrncontrolmenu()
 		nrnpointmenu($o3)
+		$o2.dend nrnsecmenu(.5,1)
 	SubVBoxObj[2].intercept(0)
 	
 	MainHBoxObj.intercept(1)
@@ -92,7 +95,7 @@ proc allInOneBoxSpiking() { local i
 	//allInOneBoxCurrents($s1, $o2, $o3)
 }
 
-proc allInOneBoxCurrents() { local i
+proc allInOneBoxCurrentsSoma() { local i
 
 	MainHBoxObj2 = new HBox()
 	for i=0,SubVBoxNum-1 SubVBoxObj2[i] = new VBox()
@@ -108,21 +111,22 @@ proc allInOneBoxCurrents() { local i
 	SubDeckObj2[1].intercept(0)
 	//////// SubVBoxes ////////
 	SubVBoxObj2[0].intercept(1)
-		PlotI($s1,$s2,"myi_ch_KvA")
-		PlotI($s1,$s2,"myi_ch_CavN")
-		PlotI($s1,$s2,"myi_ch_CavL")
+		PlotI($s1,$s2,"i_cadyn")
+		//PlotI($s1,$s2,"i_leak")
+		PlotI($s1,$s2,"i_hd")
 		SubDeckObj2[0].flip_to(0)
 	SubVBoxObj2[0].intercept(0)
 	
 	SubVBoxObj2[1].intercept(1)
-		PlotI($s1,$s2,"myi_ch_KCaS")
-		PlotI($s1,$s2,"myi_ch_KvCaB")
-		PlotI($s1,$s2,"myi_ch_Nav")
+		//PlotI($s1,$s2,"i_na3")
+		PlotI($s1,$s2,"i_nap")
+		PlotI($s1,$s2,"i_kdr")
 	SubVBoxObj2[1].intercept(0)
 	
 	SubVBoxObj2[2].intercept(1)
-		PlotI($s1,$s2,"myi_ch_Kdrfast")
-		PlotI($s1,$s2,"myi_ch_leak")
+		PlotI($s1,$s2,"i_sAHP")
+		PlotI($s1,$s2,"i_im")
+		PlotI($s1,$s2,"i_kap")
 	SubVBoxObj2[2].intercept(0)
 	
 	MainHBoxObj2.intercept(1)
